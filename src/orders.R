@@ -17,6 +17,11 @@ all_tables[['orders']]%>%glimpse()
 #2 years of data
 summary(all_tables[['orders']])
 
+#Determine what different statuses exist in the event modeling/forecasting is to occur
+all_tables[['orders']]%>%
+  group_by(order_status)%>%
+  summarise(n = n())
+
 #Customer ID identified as the identifier to match
 #Orders and customer table is the same length
 
@@ -111,7 +116,6 @@ all_tables[['customers']]%>%
   #Find the top 100 fastest approval regions when approving for clients
   dplyr::top_n(n = 100, wt = 1/approval_mins)%>%
   arrange(desc(approval_mins))
-
 
 
 #Determine the time for approval after a purchase is completed by the customer, by city
