@@ -1,4 +1,5 @@
 require(dplyr)
+require(magrittr)
 #Exploratory Data Analysis
 ds <- list.files(path = "data",
                  pattern = "*.csv",
