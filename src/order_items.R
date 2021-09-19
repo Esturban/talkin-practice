@@ -25,15 +25,23 @@ group_by(product_category_name_english)%>%
          avg_price = purrr::map_dbl(.x = data,~mean(.x$price)),
          unq_products = purrr::map_dbl(.x = data,~length(unique(.x$product_id))),
          sales = purrr::map_dbl(.x = data,~ sum(.x$price)),
+         sales_n2017 = purrr::map_dbl(.x = data,~ sum(.x$price[lubridate::year(.x$order_purchase_timestamp)!=2017])),
+         sales_2017 = purrr::map_dbl(.x = data,~ sum(.x$price[lubridate::year(.x$order_purchase_timestamp)==2017])),
          aov = purrr::map_dbl(.x = data,~ sum(.x$price)/length(unique(.x$order_id))),
          pct_sales = sales/sum(sales),
          fr_pr = avg_freight/avg_price
   )%>%
   arrange(desc(pct_sales))%>%
   #Determine the proportion of sales made up by the top n categories
-  mutate(prop = cumsum(pct_sales))%>%print(n=20)
-
+  mutate(prop = cumsum(pct_sales),
+         all_sales = cumsum(sales),
+         all_sales_2017 = cumsum(sales_2017),
+         all_sales_n2017 = cumsum(sales_n2017),
+  )%>%
+  print(n=20)
+#Do around $5 million Real in Sales based on complete year
 
 #The majority of sales are in health, beauty, bed, bath, watches, gifts and computer accessories
+
 
 
