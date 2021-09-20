@@ -1,14 +1,4 @@
 # eda
-require(dplyr)
-#Exploratory Data Analysis
-ds <- list.files(path = "data",
-                 pattern = "*.csv",
-                 full.names = T)
-all_tables <- sapply(ds, readr::read_csv)
-names(all_tables) <-
-  gsub("olist_|_dataset|.csv|data\\/", "", names(all_tables))
-
-
 # Rows: 99,441
 # Columns: 5
 # $ customer_id              <chr> "06b8999e2fba1a1fbc88172c00ba8bc7", "18955e83d337fd6b2def6b18a428ac77", "4e7b3e00288586ebd08712fdd0374a03", "b2b6027bc5c5109e52~
