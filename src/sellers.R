@@ -12,7 +12,7 @@ summary(all_tables[['sellers']])
 
 all_tables[['sellers']]%>%
   group_by(seller_city)%>%
-  summarise(n = n())
+  summarise(n = n())%>%arrange(desc(n))
 
 
 #Appears to be a city that is named as a phone number or something.  Probably just dirty data or an online business
